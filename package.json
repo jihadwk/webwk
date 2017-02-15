@@ -11,6 +11,14 @@
   "author": "wukai",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.14.1"
+    "body-parser": "^1.16.1",
+    "connect-redis": "^3.2.0",
+    "cookie-parser": "^1.4.3",
+    "ejs": "2.3.4",
+    "express": "^4.14.1",
+    "express-session": "^1.15.1",
+    "hiredis": "^0.5.0",
+    "morgan": "^1.8.1",
+    "redis": "^2.6.5"
   }
 }
