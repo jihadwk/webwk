@@ -3,7 +3,10 @@ var app = express();
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var logger = require('morgan');
+// var logger = require('morgan');
+// var log4js = require('log4js');
+// log4js.configure('./config/log4js.json');
+var logger = require('./util/logger');
 var session = require('express-session');
 var RedisStore = require('connect-redis')(session);
 var config = require('./config');
@@ -21,8 +24,11 @@ var ejs = require('ejs');
 app.engine('.html',ejs.__express);
 //设置模版引擎
 app.set('view engine','html');
-//http日志
-app.use(logger('dev'));
+//http日志 中间件
+// app.use(logger('dev'));
+// app.use(log4js.connectLogger(log4js.getLogger('logInfo'),{level:'auto'}));
+// app.use(log4js.connectLogger(log4js.getLogger('logInfo')));
+logger.use(app);
 /**
  * 解析请求参数生成req.body req.cookies
  */
@@ -43,8 +49,7 @@ app.use(session({
   resave:true, //重新保存session
   saveUninitialized:true //新加session保存
 }))
-
-app.get('/', function (req, res) {              
+app.get('/', function (req, res) {       
   res.send('Hello World!');
 });
 

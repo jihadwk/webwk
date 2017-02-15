@@ -6,4 +6,5 @@ session存储方式
 express-session:内存存储方式，sails内部集成的就是这个
 connect-mongo:使用mongodb存储session
 connect-redis:使用redis做缓存层来持久化session，速度比mongodb更快
+shortid:生成短ID
 
