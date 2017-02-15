@@ -1,4 +1,5 @@
 # webwk
+多打两个空格换行  
 express+mongodb+layui(easyui bootstrap)  
 http协议自身无状态  
 cookie和session都能解决这个问题,cookie是将状态数据保存在客户端，session则是将状态数据保存在服务端  
