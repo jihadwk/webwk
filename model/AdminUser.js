@@ -4,7 +4,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var shortid = require('shortid');
-
+var log = require('../util/logger').logger;
 var AdminUserSchema = new Schema({
     _id:{
         type:String,
@@ -38,8 +38,8 @@ var AdminUserSchema = new Schema({
 /**
  * 实例方法
  */
-AdminUserSchema.methods.findByUserName = function(userName,callback){
-    return AdminUser.find({userName:userName},callback);
+AdminUserSchema.methods.say = function(){
+    return log.info('my name is '+this.userName);
 }
 
 /**
