@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 // var log4js = require('log4js');
 // log4js.configure('./config/log4js.json');
 var logger = require('./util/logger');
+require('./util/db');
 var session = require('express-session');
 var RedisStore = require('connect-redis')(session);
 var config = require('./config');
@@ -55,5 +56,5 @@ app.get('/', function (req, res) {
 
 if (!module.parent) {
   app.listen(3000);
-  console.log('Express started on port 3000');
+  logger.logger.info('Express started on port 3000');
 }

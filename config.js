@@ -7,5 +7,7 @@ module.exports = {
     redis_pass:'',//redis认证密码
     session_ttl:1800,//session的过期时间 单位是 秒
     //项目运行模式
-    debug:true
+    debug:true,
+    //mongodb地址
+    mongodb:"mongodb://localhost/webwk",
 }
