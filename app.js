@@ -50,9 +50,43 @@ app.use(session({
   resave:true, //重新保存session
   saveUninitialized:true //新加session保存
 }))
-app.get('/', function (req, res) {       
-  res.send('Hello World!');
+// app.get('/', function (req, res) {       
+//   res.send('Hello World!');
+// });
+//路由配置
+//前台
+require('./routes/index')(app);
+
+//添加中间件,判断后台是否已登陆
+app.use(function(req,res,next){
+  if(!req.session.user){
+    if(req.url=='/login'||req.url=='/register'){
+      next();
+    }else{
+      res.redirect('/login');
+    }
+  }else{
+    next();
+  }
+})
+//后台
+require('./routes/admin')(app);
+
+//若是以上路由均不满足，则是404
+app.use(function(req,res,next){
+  var err = new Error('not found');
+  err.status = 404;
+  next(err);
 });
+
+//显示错误页面
+app.use(function(err,req,res){
+  res.status(err.status||500);
+  res.render('website/index/error',{
+    message:err.message,
+    error:err
+  })
+})
 
 if (!module.parent) {
   app.listen(3000);
