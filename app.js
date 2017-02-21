@@ -17,7 +17,7 @@ var config = require('./config');
 //app.use(express.static(__dirname+'/public'));
 app.use('/static', express.static(path.join(__dirname,'public')));
 //设置模版文件所在目录
-app.set('views',path.join(__dirname+'views'));
+app.set('views',path.join(__dirname,'views'));
 /**
  * 使项目支持html模板，使用和ejs模板一样
  */
@@ -37,7 +37,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(cookieParser());
 /**
- * session存储到redis
+ * session存储到redis,如果redis没开，则req对象里没有session对象，在redis里以字符串方式存储，键为sess:sessionID,值为{cookie:{maxAge:xx,httpOnly:true,path:'/'}}
  */
 app.use(session({
   store:new RedisStore({
@@ -46,18 +46,26 @@ app.use(session({
     pass:config.redis_pass,
     ttl:config.session_ttl
   }),
-  secret:'wwwwkkk',
+  secret:'webwk',
   resave:true, //重新保存session
   saveUninitialized:true //新加session保存
 }))
 // app.get('/', function (req, res) {       
 //   res.send('Hello World!');
 // });
+//好像是配置策略
+// var router = express.Router();
+// router.use('/admin',function(req,res,next){
+
+//   next();
+// })
+// app.use('/admin',router);
+
 //路由配置
 //前台
 require('./routes/index')(app);
 
-//添加中间件,判断后台是否已登陆
+//添加中间件,判断后台是否已登陆(相当于策略)
 app.use(function(req,res,next){
   if(!req.session.user){
     if(req.url=='/login'||req.url=='/register'){

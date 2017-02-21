@@ -3,6 +3,6 @@
  */
 module.exports = {
     login:function(req,res){
-        res.send('login');
+        res.render('admin/login');
     }
 }
