@@ -15,5 +15,5 @@ layui.use(['layer', 'form'],function(){
 	window.jQuery = window.$ = layui.jquery;
    $(".layui-canvs").width($(window).width());
    $(".layui-canvs").height($(window).height());
-   
+   console.log('lll',layui.jquery);
 });

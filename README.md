@@ -9,5 +9,6 @@ connect-mongo:使用mongodb存储session
 connect-redis:使用redis做缓存层来持久化session，速度比mongodb更快  
 shortid:生成短ID 
 layui 像easyUI一样有丰富的组件可以使用，又像angularjs一样代码可以模块化  
+webfont 在线字体 icon  @font-face引入  
  
 

@@ -12,6 +12,10 @@ var session = require('express-session');
 var RedisStore = require('connect-redis')(session);
 var config = require('./config');
 /**
+ * 验证码库
+ */
+var svgCaptcha = require('svg-captcha');
+/**
  * 静态资源目录配置 /static 可配置的虚拟路径
  */
 //app.use(express.static(__dirname+'/public'));
@@ -50,9 +54,23 @@ app.use(session({
   resave:true, //重新保存session
   saveUninitialized:true //新加session保存
 }))
-// app.get('/', function (req, res) {       
-//   res.send('Hello World!');
-// });
+/**
+ * 验证码图片刷新,在登录验证中间件前面create:生成字符串
+ * createMathExpr生成数学公式
+ */
+app.get('/captcha', function (req, res) {
+  var captcha = svgCaptcha.createMathExpr({
+    size: 4, // 验证码长度
+    ignoreChars: '0o1i', // 验证码字符中排除 0o1i
+    noise: 1, // 干扰线条的数量
+    color: true, // 验证码的字符是否有颜色，默认没有，如果设定了背景，则默认有
+    background: '#c4c4c5' // background color of the svg image
+  });
+  //将生成的验证码放在session中
+  req.session.captcha = captcha.text;
+  res.set('Content-Type', 'image/svg+xml');
+  res.status(200).send(captcha.data);
+});
 //好像是配置策略
 // var router = express.Router();
 // router.use('/admin',function(req,res,next){
