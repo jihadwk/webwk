@@ -86,10 +86,10 @@ require('./routes/index')(app);
 //添加中间件,判断后台是否已登陆(相当于策略)
 app.use(function(req,res,next){
   if(!req.session.user){
-    if(req.url=='/login'||req.url=='/register'){
+    if(req.url=='/login.html'||req.url=='/signIn'){
       next();
     }else{
-      res.redirect('/login');
+      res.redirect('/login.html');
     }
   }else{
     next();

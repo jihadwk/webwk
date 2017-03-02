@@ -12,7 +12,15 @@ module.exports = {
      * 登录逻辑
      */
     signIn:function(req,res){
+        var username = req.body.username;
+        var password = req.body.password;
+        var captcha = req.body.captcha;
+        if(req.session.captcha == captcha){
 
+        }else{
+            //验证码错误
+            return res.json({'status':'captcha error'});
+        }
     },
     /**
      * 注册
