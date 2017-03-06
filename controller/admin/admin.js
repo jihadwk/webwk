@@ -1,6 +1,9 @@
 /**
  * 后台处理
  */
+
+var common = require('../../util/common');
+var config = require('../../config');
 module.exports = {
     /**
      * 登录页面
@@ -14,8 +17,9 @@ module.exports = {
     signIn:function(req,res){
         var username = req.body.username;
         var password = req.body.password;
+        var newPsd = common.encrypt(password,config.encrypt_key);
         var captcha = req.body.captcha;
-        if(req.session.captcha == captcha){
+        if(common.compareString(req.session.captcha,captcha)){
 
         }else{
             //验证码错误

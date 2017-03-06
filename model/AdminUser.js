@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var shortid = require('shortid');
 var log = require('../util/logger').logger;
+var AdminGroup = require('./AdminGroup');
 var AdminUserSchema = new Schema({
     _id:{
         type:String,

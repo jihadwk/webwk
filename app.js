@@ -15,6 +15,7 @@ var config = require('./config');
  * 验证码库
  */
 var svgCaptcha = require('svg-captcha');
+require('./util/validator');
 /**
  * 静态资源目录配置 /static 可配置的虚拟路径
  */

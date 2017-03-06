@@ -10,4 +10,6 @@ module.exports = {
     debug:true,
     //mongodb地址
     mongodb:"mongodb://localhost/webwk",
+    //加密密钥(密码加密)
+    encrypt_key:'webwk/scdm',
 }

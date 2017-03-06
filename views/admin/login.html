@@ -77,9 +77,11 @@
                 layer.alert('请填入相关信息', { icon: 2 });
                 return false;
             }
-            $.post("/login", { username: username, password: password, captcha: captcha }, function (result) {
+            $.post("/signIn", { username: username, password: password, captcha: captcha }, function (result) {
                 if (result.status === "captcha error") {
                     layer.alert('验证码错误', { icon: 2 });
+                    //可以自动刷新验证码
+                    
                 } else if (result.status === "error") {
                     layer.alert('系统错误', { icon: 2 });
                 } else if (result.status === "not exist") {
