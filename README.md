@@ -11,6 +11,6 @@ shortid:生成短ID
 layui 像easyUI一样有丰富的组件可以使用，又像angularjs一样代码可以模块化  
 webfont 在线字体 icon  @font-face引入  
 https://github.com/chriso/validator.js validator库 字符串验证，已经写了很多正则，  
-例如isEmail ,isIP,也可以方便的扩展，validator.extend('name',function(str){}))
+例如isEmail ,isIP,也可以方便的扩展，validator.extend('name',function(str){}))(低版本可以扩展，高版本不能扩展了)
  
 

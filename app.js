@@ -15,7 +15,6 @@ var config = require('./config');
  * 验证码库
  */
 var svgCaptcha = require('svg-captcha');
-require('./util/validator');
 /**
  * 静态资源目录配置 /static 可配置的虚拟路径
  */
@@ -85,17 +84,29 @@ app.get('/captcha', function (req, res) {
 require('./routes/index')(app);
 
 //添加中间件,判断后台是否已登陆(相当于策略)
+// app.use(function(req,res,next){
+//   if(!req.session.user){
+//     if(req.url=='/login.html'||req.url=='/signIn'){
+//       next();
+//     }else{
+//       res.redirect('/login.html');
+//     }
+//   }else{
+//     next();
+//   }
+// })
 app.use(function(req,res,next){
-  if(!req.session.user){
-    if(req.url=='/login.html'||req.url=='/signIn'){
-      next();
-    }else{
-      res.redirect('/login.html');
-    }
-  }else{
-    next();
-  }
-})
+  //    针对注册会员
+  // res.locals.logined = req.session.logined;
+  // res.locals.userInfo = req.session.user;
+  //    针对管理员
+  res.locals.adminlogined = req.session.adminlogined;
+  res.locals.adminUserInfo = req.session.adminUserInfo;
+  res.locals.adminNotices = req.session.adminNotices;
+  //    指定站点域名
+  res.locals.myDomain = req.headers.host;
+  next();
+});
 //后台
 require('./routes/admin')(app);
 

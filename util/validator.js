@@ -1,5 +1,5 @@
 /**
- * 扩展validator
+ * 扩展validator，高版本不能使用扩展了
  */
 var validator = require('validator');
 //自定义校验扩展

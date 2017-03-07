@@ -34,5 +34,16 @@ module.exports = {
         oldPsd += decipher.update(data,"hex","utf8");
         oldPsd += decipher.final("utf8");
         return oldPsd;
-    }
+    },
+    /**
+     * 请求来自IP
+     */
+    getClienIp: function (req) {
+
+        return req.headers['x-forwarded-for'] ||
+            req.connection.remoteAddress ||
+            req.socket.remoteAddress ||
+            req.connection.socket.remoteAddress;
+
+    },
 }
