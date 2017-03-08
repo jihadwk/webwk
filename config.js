@@ -12,4 +12,6 @@ module.exports = {
     mongodb:"mongodb://localhost/webwk",
     //加密密钥(密码加密)
     encrypt_key:'webwk/scdm',
+    //网页标题
+    title:'CMS后台管理'
 }

@@ -11,6 +11,7 @@ require('./util/db');
 var session = require('express-session');
 var RedisStore = require('connect-redis')(session);
 var config = require('./config');
+// app.locals.title = config.title;
 /**
  * 验证码库
  */
@@ -105,6 +106,7 @@ app.use(function(req,res,next){
   res.locals.adminNotices = req.session.adminNotices;
   //    指定站点域名
   res.locals.myDomain = req.headers.host;
+  res.locals.title = config.title;
   next();
 });
 //后台
