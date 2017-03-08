@@ -72,6 +72,11 @@ app.get('/captcha', function (req, res) {
   res.set('Content-Type', 'image/svg+xml');
   res.status(200).send(captcha.data);
 });
+app.all('/auth/local',function(req,res){
+  req.session.user = 'wkxxx';
+  console.log('sessionID:',req.session.id);
+  return res.json({id:'hellloooo'});
+});
 //好像是配置策略
 // var router = express.Router();
 // router.use('/admin',function(req,res,next){
