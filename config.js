@@ -13,5 +13,7 @@ module.exports = {
     //加密密钥(密码加密)
     encrypt_key:'webwk/scdm',
     //网页标题
-    title:'CMS后台管理'
+    title:'CMS后台管理',
+    //cookie加密,cookieParser和connect-redis同时使用 才会生效
+    session_secret:'webwk',
 }

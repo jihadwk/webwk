@@ -3,6 +3,7 @@ var app = express();
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var favicon = require('serve-favicon');
 // var logger = require('morgan');
 // var log4js = require('log4js');
 // log4js.configure('./config/log4js.json');
@@ -11,6 +12,9 @@ require('./util/db');
 var session = require('express-session');
 var RedisStore = require('connect-redis')(session);
 var config = require('./config');
+//对response响应压缩 compress all responses
+var compression = require('compression');
+app.use(compression());
 // app.locals.title = config.title;
 /**
  * 验证码库
@@ -20,6 +24,7 @@ var svgCaptcha = require('svg-captcha');
  * 静态资源目录配置 /static 可配置的虚拟路径
  */
 //app.use(express.static(__dirname+'/public'));
+app.use(favicon(path.join(__dirname,'public','favicon.ico')));
 app.use('/static', express.static(path.join(__dirname,'public')));
 //设置模版文件所在目录
 app.set('views',path.join(__dirname,'views'));
@@ -30,6 +35,7 @@ var ejs = require('ejs');
 app.engine('.html',ejs.__express);
 //设置模版引擎
 app.set('view engine','html');
+
 //http日志 中间件
 // app.use(logger('dev'));
 // app.use(log4js.connectLogger(log4js.getLogger('logInfo'),{level:'auto'}));
@@ -40,18 +46,18 @@ logger.use(app);
  */
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
-app.use(cookieParser());
+app.use(cookieParser(config.session_secret));//解密cookie
 /**
  * session存储到redis,如果redis没开，则req对象里没有session对象，在redis里以字符串方式存储，键为sess:sessionID,值为{cookie:{maxAge:xx,httpOnly:true,path:'/'}}
  */
 app.use(session({
+  secret:config.session_secret,//cookie加密
   store:new RedisStore({
     port:config.redis_port,
     host:config.redis_host,
     pass:config.redis_pass,
     ttl:config.session_ttl
-  }),
-  secret:'webwk',
+  }), 
   resave:true, //重新保存session
   saveUninitialized:true //新加session保存
 }))
