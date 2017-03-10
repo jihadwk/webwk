@@ -60,5 +60,11 @@ module.exports = {
      */
     index:function(req,res){
         res.render('admin/index');
+    },
+    /**
+     * 首页
+     */
+    main:function(req,res){
+        res.render('admin/main');
     }
 }
