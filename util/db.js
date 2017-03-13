@@ -1,6 +1,8 @@
 var config = require('../config');
 var mongoose = require('mongoose');
 var log = require('./logger').logger;
+//mongoose内置的Promise已声明不可用，使用es6 自带的Promise
+mongoose.Promise = global.Promise;
 mongoose.connect(config.mongodb);
 
 /**
