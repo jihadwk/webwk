@@ -81,7 +81,7 @@
                 if (result.ret === 3) {
                     layer.alert('验证码错误', { icon: 2 });
                     //可以自动刷新验证码
-                    
+                    $('#verifyImg').trigger("click");
                 } else if (result.ret === 2) {
                     layer.alert('非法参数', { icon: 2 });
                 } else if (result.ret === 0) {

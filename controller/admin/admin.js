@@ -30,19 +30,21 @@ module.exports = {
                         return res.end(err);
                     }
                     if(user){
-                        // req.session.adminPower = user.group.power;
+                        if(user.group){
+                            req.session.adminPower = user.group.power;
+                        }            
                         req.session.adminlogined = true;
                         req.session.adminUserInfo = user;
                         //存入操作日志
                         SystemOptionLog.addUserLoginLogs(req,res,common.getClienIp(req));
-                        res.json({ret:1});
+                        return res.json({ret:1});
                     }else{
                         log.info("登录失败");
-                        res.json({ret:0,msg:"用户名或密码错误"});
+                        return res.json({ret:0,msg:"用户名或密码错误"});
                     }
                 })
             }else{
-                res.json({ret:2,msg:'非法参数'});
+                return res.json({ret:2,msg:'非法参数'});
             }
         }else{
             //验证码错误
