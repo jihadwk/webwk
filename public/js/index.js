@@ -55,7 +55,7 @@ $(function(){
    $('#lock').mouseover(function(){
    	   layer.tips('请按Alt+L快速锁屏！', '#lock', {
              tips: [1, '#FF5722'],
-             time: 4000
+             time: 1000
        });
    })
    // 快捷键锁屏设置
@@ -92,17 +92,17 @@ $(function(){
    checkLockStatus('0');
    // 锁定屏幕
    function lockSystem(){
-   		
-   	   var url = '';
-   	   $.post(
-   	   	   url,
-   	   	   function(data){
-   	   	   if(data=='1'){
-   	   	   	  checkLockStatus(1);
-   	   	   }else{
-              layer.alert('锁屏失败，请稍后再试！');
-   	   	   }
-   	   });
+   		checkLockStatus(1);
+   	  //  var url = '';
+   	  //  $.post(
+   	  //  	   url,
+   	  //  	   function(data){
+   	  //  	   if(data=='1'){
+   	  //  	   	  checkLockStatus(1);
+   	  //  	   }else{
+      //         layer.alert('锁屏失败，请稍后再试！');
+   	  //  	   }
+   	  //  });
    	   startTimer();
    }
    //解锁屏幕

@@ -66,5 +66,14 @@ module.exports = {
      */
     main:function(req,res){
         res.render('admin/main');
+    },
+    personInfo:function(req,res){
+        res.render('admin/personInfo');
+    },
+    mylogInfo:function(req,res){
+        res.render('admin/mylogInfo');
+    },
+    changePwd:function(req,res){
+        res.render('admin/changePwd');
     }
 }
