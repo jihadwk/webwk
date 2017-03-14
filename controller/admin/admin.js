@@ -77,5 +77,11 @@ module.exports = {
     },
     changePwd:function(req,res){
         res.render('admin/changePwd');
-    }
+    },
+    logout:function(req,res){
+        req.session.adminPower = null;
+        req.session.adminlogined = false;
+        req.session.adminUserInfo = null;
+        res.redirect('/login.html');
+    },
 }

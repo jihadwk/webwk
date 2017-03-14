@@ -11,6 +11,7 @@
   "author": "wukai",
   "license": "ISC",
   "dependencies": {
+    "async": "^2.1.5",
     "body-parser": "^1.16.1",
     "compression": "^1.6.2",
     "connect-redis": "^3.2.0",

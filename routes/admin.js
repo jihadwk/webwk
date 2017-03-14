@@ -12,4 +12,5 @@ module.exports = function(app){
 
     app.post('/signIn',Admin.signIn);
     app.post('/signUp',Admin.signUp);
+    app.get('/logout',Admin.logout);
 }
