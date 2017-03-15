@@ -31,7 +31,7 @@ var AdminUserSchema = new Schema({
         default:false
     },
     group:{
-        type:String,
+        type:Schema.Types.ObjectId,
         ref:'AdminGroup'
     }
     

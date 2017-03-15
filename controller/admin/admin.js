@@ -84,4 +84,7 @@ module.exports = {
         req.session.adminUserInfo = null;
         res.redirect('/login.html');
     },
+    dochangePwd:function(req,res){
+        
+    }
 }
